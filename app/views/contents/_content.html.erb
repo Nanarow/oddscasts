@@ -1,0 +1,17 @@
+<div id="<%= dom_id content %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Title:</strong>
+    <%= content.title %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Description:</strong>
+    <%= content.description %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Cover:</strong>
+    <%= image_tag content.contentable.cover if content.contentable.cover.attached? %>
+  </p>
+
+</div>
