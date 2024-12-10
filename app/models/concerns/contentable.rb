@@ -2,6 +2,8 @@ module Contentable
   extend ActiveSupport::Concern
 
   included do
+    has_one_attached :cover
+
     has_one :content, as: :contentable, dependent: :destroy
     delegate :title, :description, to: :content, allow_nil: true
 
