@@ -1,0 +1,17 @@
+<div id="<%= dom_id article %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Title:</strong>
+    <%= article.title %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Description:</strong>
+    <%= article.description %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Cover:</strong>
+    <%= link_to article.cover.filename, article.cover if article.cover.attached? %>
+  </p>
+
+</div>

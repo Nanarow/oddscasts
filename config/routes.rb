@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  scope :admin do
+    resources :articles, controller: "admin/articles"
+    resources :videos, controller: "admin/videos"
+  end
+
+  resources :articles, only: [ :index ]
+  resources :videos, only: [ :index ]
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

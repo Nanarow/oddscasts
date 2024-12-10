@@ -1,0 +1,22 @@
+<div id="<%= dom_id video %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Title:</strong>
+    <%= video.title %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Description:</strong>
+    <%= video.description %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Url:</strong>
+    <%= video.url %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Cover:</strong>
+    <%= link_to video.cover.filename, video.cover if video.cover.attached? %>
+  </p>
+
+</div>
