@@ -13,6 +13,24 @@ RSpec.shared_examples "Contents", type: :system do
     expect_content_to_be_created
   end
 
+  scenario "User submits content for review" do
+    visit_content_details_page
+    click_submit_content_for_review
+    expect_content_to_be_submitted_for_review
+  end
+
+  scenario "User approves content" do
+    visit_content_details_page
+    click_approve_content
+    expect_content_to_be_approved
+  end
+
+  scenario "User rejects content" do
+    visit_content_details_page
+    click_reject_content
+    expect_content_to_be_rejected
+  end
+
   scenario "User edits an content" do
     visit_edit_content_page
     fill_in_updated_content_details
@@ -80,20 +98,48 @@ RSpec.shared_examples "Contents", type: :system do
   end
 
   def expect_content_to_be_created
-    expect(page).to have_content("was successfully created.")
+    expect(page).to have_content("successfully created.")
     expect(page).to have_content(content.title)
     expect(page).to have_content(content.description)
+    expect(page).to have_content("draft")
   end
 
   def expect_content_to_be_updated
-    expect(page).to have_content("was successfully updated.")
+    expect(page).to have_content("successfully updated.")
   end
 
   def expect_content_to_be_deleted
-    expect(page).to have_content("was successfully destroyed.")
+    expect(page).to have_content("successfully destroyed.")
   end
 
   def expect_contents_to_be_displayed
     expect(page).to have_content("Show this", count: contents.length)
+  end
+
+  def click_submit_content_for_review
+    click_on "Submit for review"
+  end
+
+  def expect_content_to_be_submitted_for_review
+    expect(page).to have_content("successfully updated.")
+    expect(page).to have_content("in_review")
+  end
+
+  def click_approve_content
+    click_on "Approve"
+  end
+
+  def expect_content_to_be_approved
+    expect(page).to have_content("successfully updated.")
+    expect(page).to have_content("published")
+  end
+
+  def click_reject_content
+    click_on "Reject"
+  end
+
+  def expect_content_to_be_rejected
+    expect(page).to have_content("successfully updated.")
+    expect(page).to have_content("draft")
   end
 end
