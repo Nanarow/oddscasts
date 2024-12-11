@@ -21,12 +21,20 @@ RSpec.shared_examples "Contents", type: :system do
 
   scenario "User approves content" do
     visit_content_details_page
+
+    click_submit_content_for_review
+    expect_content_to_be_submitted_for_review
+
     click_approve_content
     expect_content_to_be_approved
   end
 
   scenario "User rejects content" do
     visit_content_details_page
+
+    click_submit_content_for_review
+    expect_content_to_be_submitted_for_review
+
     click_reject_content
     expect_content_to_be_rejected
   end
@@ -39,7 +47,6 @@ RSpec.shared_examples "Contents", type: :system do
   end
 
   scenario "User deletes an content" do
-    visit_contents_page
     visit_content_details_page
     delete_content
     expect_content_to_be_deleted
@@ -121,7 +128,7 @@ RSpec.shared_examples "Contents", type: :system do
   end
 
   def expect_content_to_be_submitted_for_review
-    expect(page).to have_content("successfully updated.")
+    expect(page).to have_content("successfully submitted for review.")
     expect(page).to have_content("in_review")
   end
 
@@ -130,7 +137,7 @@ RSpec.shared_examples "Contents", type: :system do
   end
 
   def expect_content_to_be_approved
-    expect(page).to have_content("successfully updated.")
+    expect(page).to have_content("successfully approved.")
     expect(page).to have_content("published")
   end
 
@@ -139,7 +146,7 @@ RSpec.shared_examples "Contents", type: :system do
   end
 
   def expect_content_to_be_rejected
-    expect(page).to have_content("successfully updated.")
+    expect(page).to have_content("successfully rejected.")
     expect(page).to have_content("draft")
   end
 end

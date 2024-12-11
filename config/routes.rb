@@ -1,8 +1,20 @@
 Rails.application.routes.draw do
   scope :admin do
     get "/" => "admin/admin#index"
-    resources :articles, controller: "admin/articles"
-    resources :videos, controller: "admin/videos"
+    resources :articles, controller: "admin/articles" do
+      member do
+        post :approve
+        post :reject
+        post :submit
+      end
+    end
+    resources :videos, controller: "admin/videos" do
+      member do
+        post :approve
+        post :reject
+        post :submit
+      end
+    end
   end
 
   resources :articles, only: [ :index ]

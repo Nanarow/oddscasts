@@ -15,6 +15,11 @@
   </p>
 
   <p class="my-5">
+    <strong class="block font-medium mb-1">State:</strong>
+    <%= video.content.state %>
+  </p>
+
+  <p class="my-5">
     <strong class="block font-medium mb-1">Cover:</strong>
     <%= link_to video.cover.filename, video.cover if video.cover.attached? %>
   </p>

@@ -1,5 +1,5 @@
 class Admin::ArticlesController < ApplicationController
-  before_action :set_article, only: %i[ show edit update destroy ]
+  before_action :set_article, only: %i[ show edit update destroy submit approve reject ]
 
   # GET /articles or /articles.json
   def index
@@ -56,6 +56,21 @@ class Admin::ArticlesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def submit
+    @article.content.submit_for_review!
+    redirect_to @article, notice: "Article was successfully submitted for review."
+  end
+
+  def approve
+    @article.content.approve!
+    redirect_to @article, notice: "Article was successfully approved."
+  end
+
+  def reject
+    @article.content.reject!
+    redirect_to @article, notice: "Article was successfully rejected."
+  end 
 
   private
     # Use callbacks to share common setup or constraints between actions.

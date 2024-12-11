@@ -11,5 +11,17 @@
     <div class="inline-block ml-2">
       <%= button_to "Destroy this video", @video, method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
     </div>
+    <% if @video.content.draft? %>
+      <%= button_to "Submit for review", submit_video_path(@video), method: :post, class: "mt-2 rounded-lg py-3 px-5 bg-indigo-500 text-white font-medium" %>
+    <% end %>
+    <br/>
+    <% if @video.content.in_review? %>
+      <div class="inline-block ml-2">
+        <%= button_to "Approve", approve_video_path(@video), method: :post, class: "mt-2 rounded-lg py-3 px-5 bg-green-500 text-white font-medium" %>
+      </div>
+      <div class="inline-block ml-2">
+        <%= button_to "Reject", reject_video_path(@video), method: :post, class: "mt-2 rounded-lg py-3 px-5 bg-red-500 text-white font-medium" %>
+      </div>
+    <% end %>
   </div>
 </div>

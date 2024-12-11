@@ -1,5 +1,5 @@
 class Admin::VideosController < ApplicationController
-  before_action :set_video, only: %i[ show edit update destroy ]
+  before_action :set_video, only: %i[ show edit update destroy submit approve reject ]
 
   # GET /videos or /videos.json
   def index
@@ -55,6 +55,21 @@ class Admin::VideosController < ApplicationController
       format.html { redirect_to videos_path, status: :see_other, notice: "Video was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def submit
+    @video.content.submit_for_review!
+    redirect_to @video, notice: "Video was successfully submitted for review."
+  end
+
+  def approve
+    @video.content.approve!
+    redirect_to @video, notice: "Video was successfully approved."
+  end
+
+  def reject
+    @video.content.reject!
+    redirect_to @video, notice: "Video was successfully rejected."
   end
 
   private

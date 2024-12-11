@@ -10,6 +10,11 @@
   </p>
 
   <p class="my-5">
+    <strong class="block font-medium mb-1">State:</strong>
+    <%= article.content.state %>
+  </p>
+
+  <p class="my-5">
     <strong class="block font-medium mb-1">Cover:</strong>
     <%= link_to article.cover.filename, article.cover if article.cover.attached? %>
   </p>
