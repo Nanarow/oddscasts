@@ -71,5 +71,3 @@ end
 gem "image_processing"
 
 gem "stateful_enum"
-
-gem "profanity_filter"

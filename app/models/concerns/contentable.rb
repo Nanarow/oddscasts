@@ -4,7 +4,7 @@ module Contentable
   included do
     has_one_attached :cover
 
-    has_one :content, as: :contentable, dependent: :destroy
+    has_one :content, as: :contentable, autosave: true, dependent: :destroy
     delegate :title, :description, to: :content, allow_nil: true
 
     after_initialize :ensure_content
@@ -24,8 +24,14 @@ module Contentable
   private
 
   def profanity
-    if ProfanityFilter::Base.profane?(title)
-      errors.add :title, "is rude"
+    return if ProfanityFilter.regex.nil?
+
+    if content.title.present? && content.title.match?(ProfanityFilter.regex)
+      errors.add(:title, "contains inappropriate content")
+    end
+
+    if content.description.present? && content.description.match?(ProfanityFilter.regex)
+      errors.add(:description, "contains inappropriate content")
     end
   end
 
