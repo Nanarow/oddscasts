@@ -59,6 +59,7 @@ class Admin::ArticlesController < ApplicationController
 
   def submit
     @article.content.submit_for_review!
+    ContentMailer.notify_content_submitted.deliver_now
     redirect_to @article, notice: "Article was successfully submitted for review."
   end
 
@@ -70,7 +71,7 @@ class Admin::ArticlesController < ApplicationController
   def reject
     @article.content.reject!
     redirect_to @article, notice: "Article was successfully rejected."
-  end 
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

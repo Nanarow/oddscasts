@@ -54,6 +54,7 @@ group :development, :test do
 
   gem "rspec-rails"
   gem "factory_bot_rails"
+  gem "letter_opener"
 end
 
 group :development do
@@ -70,3 +71,5 @@ end
 gem "image_processing"
 
 gem "stateful_enum"
+
+gem "profanity_filter"

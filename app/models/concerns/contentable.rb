@@ -8,6 +8,7 @@ module Contentable
     delegate :title, :description, to: :content, allow_nil: true
 
     after_initialize :ensure_content
+    validate :profanity
   end
 
   def title=(value)
@@ -21,6 +22,12 @@ module Contentable
   end
 
   private
+
+  def profanity
+    if ProfanityFilter::Base.profane?(title)
+      errors.add :title, "is rude"
+    end
+  end
 
   def ensure_content
     build_content if content.nil?
