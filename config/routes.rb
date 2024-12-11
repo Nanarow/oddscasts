@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   scope :admin do
+    get "/" => "admin/admin#index"
     resources :articles, controller: "admin/articles"
     resources :videos, controller: "admin/videos"
   end

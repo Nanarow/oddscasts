@@ -1,13 +1,14 @@
 require 'rails_helper'
 
 describe "Videos Management", type: :system do
-  let!(:videos) { create_list(:video, 4) }
-  let(:video) { create(:video, title: "Video 1", description: "Video Description 1") }
-
-  scenario "User views all videos" do
-    visit_videos_page
-    expect_videos_to_be_displayed
+  it_should_behave_like "Contents" do
+    let(:contentable) { "Videos" }
+    let(:content) { video }
+    let(:contents) { videos }
   end
+
+  let!(:videos) { create_list(:video, 4) }
+  let(:video) { create(:video, title: "Video 1", description: "Video Description 1", url: "link 1") }
 
   scenario "User creates a new video" do
     visit_new_video_page
@@ -24,12 +25,6 @@ describe "Videos Management", type: :system do
     expect_video_to_be_updated
   end
 
-  scenario "User deletes an video" do
-    visit_videos_page
-    visit_video_details_page
-    delete_video
-    expect_video_to_be_deleted
-  end
 
   private
 
@@ -52,6 +47,7 @@ describe "Videos Management", type: :system do
   def fill_in_video_form
     fill_in "Title", with: video.title
     fill_in "Description", with: video.description
+    fill_in "Url", with: video.url
   end
 
   def attach_video_cover
@@ -61,6 +57,7 @@ describe "Videos Management", type: :system do
   def fill_in_updated_video_details
     fill_in "Title", with: "Updated Video"
     fill_in "Description", with: "Updated description of the video"
+    fill_in "Url", with: "link 2"
   end
 
   def submit_video_create_form
