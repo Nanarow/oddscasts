@@ -1,0 +1,28 @@
+<div>
+  <h1 class="font-bold text-4xl">Movies#index</h1>
+  <p>Find me in app/views/movies/index.html.erb</p>
+  <button id="fetch-movies" class="rounded-lg py-3 px-5 inline-block font-medium bg-green-400">Fetch movies</button>
+  <div class="flex flex-col gap-2" id="movies">
+    <% @movies.each do |movie| %>
+      <%= render 'movie', movie: movie %>
+    <% end %>
+  </div>
+  <script>
+    btn = document.getElementById('fetch-movies')
+    btn.addEventListener('click', () => {
+      uri = "<%= Movies.uri %>"
+      const movies = document.getElementById('movies')
+      fetch(uri)
+        .then(response => {
+          return response.json()
+        })
+        .then((data) => {
+          movies.innerHTML = data.length
+        })
+        .catch((error) => {
+          movies.innerHTML = error.message
+        })
+
+    })
+  </script>
+</div>

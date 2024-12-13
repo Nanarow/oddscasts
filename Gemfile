@@ -66,8 +66,13 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "webmock"
+  gem "vcr"
+  gem "sinatra"
+  gem "capybara_discoball"
+  gem "webrick"
 end
 
 gem "image_processing"
-
 gem "stateful_enum"
+gem "httparty"
